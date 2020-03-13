@@ -33,7 +33,7 @@ func Open(file string) (err error) {
 // FatalOpen open the ipdb file, if an error occurs the program exit
 func FatalOpen(file string) {
 	if err := Open(file); err != nil {
-		log.Fatalf("Open ipdb file error: %v\n", err)
+		log.Fatalln(err)
 	}
 }
 
