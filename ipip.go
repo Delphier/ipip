@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/ipipdotnet/ipdb-go"
@@ -20,7 +22,7 @@ var (
 func Open(file string) (err error) {
 	if DB == nil {
 		if file == "" {
-			file = "ipipfree.ipdb"
+			file = filepath.Join(getExeDir(), "ipipfree.ipdb")
 		}
 		DB, err = ipdb.NewCity(file)
 		if err != nil {
@@ -68,4 +70,9 @@ func trim(result []string) (s string) {
 		s = strings.TrimSpace(result[0] + " " + s)
 	}
 	return
+}
+
+func getExeDir() string {
+	s, _ := os.Executable()
+	return filepath.Dir(s)
 }
